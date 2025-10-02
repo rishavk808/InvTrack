@@ -23,3 +23,11 @@ router.put('/:id', auth, updateUser);
 router.delete('/:id', auth, authorize('admin'), deleteUser);
 
 module.exports = router;
+
+/* 
+Flow
+GET /api/users → Admin gets all users.
+GET /api/users/:id → Admin or same user can view details.
+PUT /api/users/:id → Admin can update anyone, staff can only update themselves.
+DELETE /api/users/:id → Admin only.
+*/
