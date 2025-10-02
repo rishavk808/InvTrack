@@ -14,7 +14,6 @@ router.post('/adjust', protect, adjustStock);
 router.get('/logs', protect, getInventoryLogs);
 
 module.exports = router;
-
 /* 
 POST /api/inventory/receive → Add new stock to product.
 POST /api/inventory/adjust → Manually set stock for a product (e.g., after physical count).
