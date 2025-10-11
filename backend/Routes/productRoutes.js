@@ -6,19 +6,18 @@ const {
   createProduct,
   updateProduct,
   deleteProduct
-} = require('../controllers/productController');
+} = require('../Controllers/productController');
 
-const auth = require('../middleware/auth');
-const { authorize } = require('../middleware/auth');
+const { protect, authorize } = require('../middleware/auth');
 
 // Public or staff-accessible (depending on your design)
-router.get('/', auth, getProducts);
-router.get('/:id', auth, getProduct);
+router.get('/', protect, getProducts);
+router.get('/:id', protect, getProduct);
 
 // Admin-only routes
-router.post('/', auth, authorize('admin'), createProduct);
-router.put('/:id', auth, authorize('admin'), updateProduct);
-router.delete('/:id', auth, authorize('admin'), deleteProduct);
+router.post('/', protect, authorize('admin'), createProduct);
+router.put('/:id', protect, authorize('admin'), updateProduct);
+router.delete('/:id', protect, authorize('admin'), deleteProduct);
 
 module.exports = router;
 

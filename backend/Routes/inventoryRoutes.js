@@ -5,7 +5,8 @@ const {
   adjustStock,
   getInventoryLogs
 } = require('../Controllers/inventoryController');
-const { protect } = require('../middleware/auth'); 
+
+const { protect, authorize } = require('../middleware/auth');
 // Receive new stock
 router.post('/receive', protect, receiveStock);
 // Adjust stock

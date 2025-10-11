@@ -1,12 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const { checkout, getSales, getSale } = require('../controllers/salesController');
-const auth = require('../middleware/auth');
-const { authorize } = require('../middleware/auth');
+const { checkout, getSales, getSale } = require('../Controllers/salesController');
+const { protect, authorize } = require('../middleware/auth');
 // Checkout (Staff only, because they handle POS)
-router.post('/checkout', auth, authorize('staff'), checkout);
+router.post('/checkout', protect, authorize('staff'), checkout);
 // Get all sales (Admin can see all, Staff can see their own)
-router.get('/', auth, getSales);
+router.get('/', protect, getSales);
 // Get a sale by ID
-router.get('/:id', auth, getSale);
+router.get('/:id', protect, getSale);
 module.exports = router;

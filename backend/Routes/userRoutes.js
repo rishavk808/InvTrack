@@ -5,22 +5,21 @@ const {
   getUserById,
   updateUser,
   deleteUser
-} = require('../controllers/userController');
+} = require('../Controllers/userController');
 
-const auth = require('../middleware/auth');
-const { authorize } = require('../middleware/auth');
+const { protect, authorize } = require('../middleware/auth');
 
 // Get all users (admin only)
-router.get('/', auth, authorize('admin'), getUsers);
+router.get('/', protect, authorize('admin'), getUsers);
 
 // Get single user (admin or same user)
-router.get('/:id', auth, getUserById);
+router.get('/:id', protect, getUserById);
 
 // Update user (admin or same user)
-router.put('/:id', auth, updateUser);
+router.put('/:id', protect, updateUser);
 
 // Delete user (admin only)
-router.delete('/:id', auth, authorize('admin'), deleteUser);
+router.delete('/:id', protect, authorize('admin'), deleteUser);
 
 module.exports = router;
 

@@ -1,15 +1,14 @@
 const express = require('express');
 const router = express.Router();
-const { login, registerStaff, logout } = require('../controllers/authController');
-const auth = require('../middleware/auth');
-const { authorize } = require('../middleware/auth');
+const { login, registerStaff, logout } = require('../Controllers/authController');
+const { protect, authorize } = require('../middleware/auth');
 // Login route
 router.post('/login', login);
 
 // Admin creates staff
-router.post('/register-staff', auth, authorize('admin'), registerStaff);
+router.post('/register-staff', protect, authorize('admin'), registerStaff);
 
 // Logout route
-router.post('/logout', auth, logout);
+router.post('/logout', protect, logout);
 
 module.exports = router;
